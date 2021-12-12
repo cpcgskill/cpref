@@ -14,6 +14,7 @@ from cpapi.all import MUuid, MObject, MDagPath, MObjectHandle, MFnDependencyNode
 from cpapi.utils import muuid_to_mobject, muuid_to_mdagpath
 from .exc import *
 
+
 class NodeRef(object):
     def __init__(self, uuid):
         """
