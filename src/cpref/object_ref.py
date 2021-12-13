@@ -13,15 +13,16 @@ from __future__ import unicode_literals, print_function
 from maya.api.OpenMaya import MSelectionList, MItSelectionList
 from .exc import *
 
+TPlug, TDagNode, TDependencyNode, TComponent = range(4)
+TText = {
+    TPlug: "Plug",
+    TDagNode: "DagNode",
+    TDependencyNode: "DependencyNode",
+    TComponent: "Component",
+}
+
 
 class Ref(object):
-    TPlug, TDagNode, TDependencyNode, TComponent = range(4)
-    TText = {
-        TPlug: "Plug",
-        TDagNode: "DagNode",
-        TDependencyNode: "DependencyNode",
-        TComponent: "Component",
-    }
 
     def __init__(self, obj_n):
         self._sel = MSelectionList()
@@ -29,7 +30,7 @@ class Ref(object):
         self._it_sel = MItSelectionList(self._sel)
 
     def __str__(self):
-        return "{}<{}>".format(self.TText[self.ref_type()], repr(self.as_string()))
+        return "{}<{}>".format(TText[self.ref_type()], repr(self.as_string()))
 
     def full_path_name(self):
         """
@@ -51,13 +52,13 @@ class Ref(object):
         if t == MItSelectionList.kUnknownItem:
             raise UnknownObjectTypeException("未知对象类型")
         if t == MItSelectionList.kPlugSelectionItem:
-            return self.TPlug
+            return TPlug
         if t == MItSelectionList.kDNselectionItem:
-            return self.TDependencyNode
+            return TDependencyNode
         if t == MItSelectionList.kDagSelectionItem:
             if self._it_sel.hasComponents():
-                return self.TComponent
-            return self.TDagNode
+                return TComponent
+            return TDagNode
         raise UnknownObjectTypeException("未知对象类型")
 
     def as_string_list(self):
