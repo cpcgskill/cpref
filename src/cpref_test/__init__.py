@@ -21,14 +21,17 @@ if not sys.modules.get("cpref") is None:
     reload(cpref)
 
 
-from cpref_test import (node, )
+from cpref_test import (object_ref, )
 
-models = (node, )
+models = (object_ref, )
 for m in models:
     reload(m)
 
 
 def test():
+    import maya.cmds as mc
     for m in models:
         print("## test models {}:".format(m))
         m.test()
+    mc.joint(n="test_joint")
+    cpref.make_ref("test_joint")

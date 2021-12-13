@@ -29,16 +29,38 @@ mayapy -m pip install cpref
 7. 打开脚本编辑器并执行以下示例代码
 
 ```python
-import maya.cmds as mc
-from cpapi.iter import selected
-from cpapi.utils import mobject_to_muuid
-from cpref.node import NodeRef
-mc.joint(n="test_joint")
-mc.select(["test_joint"], r=True)
-uid = mobject_to_muuid(list(selected())[0])
-r = NodeRef(uid)
-print("NodeRef __init__ >>", r)
-print("NodeRef full_path_name >>", r.full_path_name())
+import maya.mel as mel
+from cpref.object_ref import Ref
+mel.eval("""polySphere -r 1 -sx 20 -sy 20 -ax 0 1 0 -cuv 2 -ch 1 -n test_poly;
+doGroup 0 1 1;
+doGroup 0 1 1;
+doGroup 0 1 1;
+doGroup 0 1 1;
+doGroup 0 1 1;
+setKeyframe -breakdown 0 -preserveCurveShape 0 -hierarchy none -controlPoints 0 -shape 0 {"group5"};""")
+r = Ref("test_poly")
+print("Ref __init__ >>", r)
+print("Ref mel_object >>", r.mel_object())
+print("Ref full_path_name >>", r.full_path_name())
+print("Ref partial_path_name >>", r.partial_path_name())
+
+print("### test test_poly")
+r = Ref("test_poly")
+print("Ref format >>", r)
+print("Ref ref_type >>", r.ref_type())
+
+print("### test test_poly.vtx[*]")
+r = Ref("test_poly.vtx[*]")
+print("Ref format >>", r)
+
+print("### test test_poly.vtx[0]")
+r = Ref("test_poly.vtx[0]")
+print("Ref format >>", r)
+
+print("### test test_poly.tx")
+r = Ref("test_poly.tx")
+print("Ref format >>", r)
+print("Ref ref_type >>", r.ref_type())
 ```
 
 ### 功能介绍
@@ -52,29 +74,57 @@ from __future__ import unicode_literals, print_function
 
 
 def test():
-    import maya.cmds as mc
-    from cpapi.iter import selected
-    from cpapi.utils import mobject_to_muuid
-    from cpref.node import NodeRef
-    mc.joint(n="test_joint")
-    mc.select(["test_joint"], r=True)
-    uid = mobject_to_muuid(list(selected())[0])
-    r = NodeRef(uid)
-    print("NodeRef __init__ >>", r)
-    print("NodeRef full_path_name >>", r.full_path_name())
-    print("NodeRef partial_path_name >>", r.partial_path_name())
-    print("NodeRef name >>", r.name())
-    print("NodeRef absolute_name >>", r.absolute_name())
+    import maya.mel as mel
+    from cpref.object_ref import Ref
+    mel.eval("""polySphere -r 1 -sx 20 -sy 20 -ax 0 1 0 -cuv 2 -ch 1 -n test_poly;
+doGroup 0 1 1;
+doGroup 0 1 1;
+doGroup 0 1 1;
+doGroup 0 1 1;
+doGroup 0 1 1;
+setKeyframe -breakdown 0 -preserveCurveShape 0 -hierarchy none -controlPoints 0 -shape 0 {"group5"};""")
+    r = Ref("test_poly")
+    print("Ref __init__ >>", r)
+    print("Ref mel_object >>", r.mel_object())
+    print("Ref full_path_name >>", r.full_path_name())
+    print("Ref partial_path_name >>", r.partial_path_name())
+
+    print("### test test_poly")
+    r = Ref("test_poly")
+    print("Ref format >>", r)
+    print("Ref ref_type >>", r.ref_type())
+
+    print("### test test_poly.vtx[*]")
+    r = Ref("test_poly.vtx[*]")
+    print("Ref format >>", r)
+
+    print("### test test_poly.vtx[0]")
+    r = Ref("test_poly.vtx[0]")
+    print("Ref format >>", r)
+
+    print("### test test_poly.tx")
+    r = Ref("test_poly.tx")
+    print("Ref format >>", r)
+    print("Ref ref_type >>", r.ref_type())
 
 test()
 ```
 
 ```
-NodeRef __init__ >> <cpref.node.NodeRef object at 0x0000027A29459148>
-NodeRef full_path_name >> |test_joint
-NodeRef partial_path_name >> test_joint
-NodeRef name >> test_joint
-NodeRef absolute_name >> :test_joint
+Ref __init__ >> DagNode<'test_poly'>
+Ref mel_object >> test_poly
+Ref full_path_name >> |group5|group4|group3|group2|group1|test_poly
+Ref partial_path_name >> test_poly
+### test test_poly
+Ref format >> DagNode<'test_poly'>
+Ref ref_type >> 1
+### test test_poly.vtx[*]
+Ref format >> Component<'test_poly.vtx[0:381]'>
+### test test_poly.vtx[0]
+Ref format >> Component<'test_poly.vtx[0]'>
+### test test_poly.tx
+Ref format >> Plug<'test_poly.translateX'>
+Ref ref_type >> 0
 ```
 
 ### 版权说明

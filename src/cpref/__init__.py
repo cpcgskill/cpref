@@ -13,13 +13,13 @@ import os
 from . import (
     exc,
 
-    node,
+    object_ref,
 )
 
 modules = (
     exc,
 
-    node,
+    object_ref,
 )
 
 if os.environ.get("CPREF_DEBUG"):
@@ -27,3 +27,7 @@ if os.environ.get("CPREF_DEBUG"):
 
     for m in modules:
         imp.reload(exc)
+
+
+def make_ref(name):
+    return object_ref.Ref(name)

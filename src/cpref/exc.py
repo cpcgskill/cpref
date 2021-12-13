@@ -9,7 +9,7 @@ u"""
 :bilibili: https://space.bilibili.com/351598127
 
 """
-
+from __future__ import unicode_literals, print_function
 
 class CPRefException(Exception):
     """基础异常"""
@@ -21,4 +21,9 @@ class EmptyObjectException(CPRefException):
     pass
 
 
-__all__ = ['CPRefException', 'EmptyObjectException']
+class UnknownObjectTypeException(CPRefException):
+    """未知对象类型异常"""
+    pass
+
+
+__all__ = ['CPRefException', 'EmptyObjectException', 'UnknownObjectTypeException']

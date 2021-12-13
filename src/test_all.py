@@ -23,3 +23,10 @@ os.environ["CPAPI_DEBUG"] = "on"
 import cpref_test
 
 cpref_test.test()
+
+try:
+    import maya.standalone
+
+    maya.standalone.uninitialize(name='python')
+except:
+    pass
