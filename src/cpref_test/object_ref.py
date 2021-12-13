@@ -21,10 +21,11 @@ doGroup 0 1 1;
 doGroup 0 1 1;
 doGroup 0 1 1;
 doGroup 0 1 1;
-setKeyframe -breakdown 0 -preserveCurveShape 0 -hierarchy none -controlPoints 0 -shape 0 {"group5"};""")
+setKeyframe {"group5"};""")
     r = Ref("test_poly")
     print("Ref __init__ >>", r)
-    print("Ref mel_object >>", r.mel_object())
+    print("Ref as_string >>", r.as_string())
+    print("Ref as_string_list >>", r.as_string_list())
     print("Ref full_path_name >>", r.full_path_name())
     print("Ref partial_path_name >>", r.partial_path_name())
 

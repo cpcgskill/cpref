@@ -29,7 +29,7 @@ class Ref(object):
         self._it_sel = MItSelectionList(self._sel)
 
     def __str__(self):
-        return "{}<{}>".format(self.TText[self.ref_type()], repr(self.mel_object()))
+        return "{}<{}>".format(self.TText[self.ref_type()], repr(self.as_string()))
 
     def full_path_name(self):
         """
@@ -60,14 +60,14 @@ class Ref(object):
             return self.TDagNode
         raise UnknownObjectTypeException("未知对象类型")
 
-    def mel_object_list(self):
+    def as_string_list(self):
         o = self._sel.getSelectionStrings()
         if len(o):
             return o
         else:
             raise EmptyObjectException("引用的对象已丢失")
 
-    def mel_object(self):
+    def as_string(self):
         """
 
         :rtype: unicode|list
