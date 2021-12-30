@@ -32,6 +32,20 @@ class Ref(object):
     def __str__(self):
         return "{}<{}>".format(TText[self.ref_type()], repr(self.as_string()))
 
+    def unsafe_m_selection_list(self):
+        """
+        返回内部选择列表
+        :rtype : MSelectionList
+        """
+        return self._sel
+
+    def unsafe_m_it_selection_list(self):
+        """
+        返回内部选择列表迭代器
+        :rtype : MItSelectionList
+        """
+        return self._it_sel
+
     def full_path_name(self):
         """
 
