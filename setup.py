@@ -14,9 +14,9 @@ setuptools.setup(
     description="Maya 对象引用库",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/cpcgskill/seal",
+    url="https://github.com/cpcgskill/cpref",
     project_urls={
-        "Bug Tracker": "https://github.com/cpcgskill/seal/issues",
+        "Bug Tracker": "https://github.com/cpcgskill/cpref/issues",
     },
     license="Apache Software License (Apache 2.0)",
     classifiers=[
@@ -38,7 +38,5 @@ setuptools.setup(
     packages=["cpref"],
     python_requires=">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*, !=3.5.*",
     # 指定依赖
-    install_requires=[
-        'astunparse==1.6.3',
-    ]
+    install_requires=[]
 )
