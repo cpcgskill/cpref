@@ -48,6 +48,10 @@ class Ref(object):
         return self._sel.getDagPath(0).partialPathName()
 
     def ref_type(self):
+        """
+        检查引用的对象类型
+        :rtype: int
+        """
         t = self._it_sel.itemType()
         if t == MItSelectionList.kUnknownItem:
             raise UnknownObjectTypeException("未知对象类型")
