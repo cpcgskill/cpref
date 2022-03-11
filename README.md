@@ -116,20 +116,34 @@ test()
 ```
 
 ```
-Ref __init__ >> DagNode<'test_poly'>
-Ref mel_object >> test_poly
-Ref full_path_name >> |group5|group4|group3|group2|group1|test_poly
-Ref partial_path_name >> test_poly
+Ref __init__ >> DagNode<u'test_poly'>
+Ref is_null >> False
+Ref as_string >> test_poly
+Ref as_string_list >> (u'test_poly',)
+
+
+### test unsafe methods
+Ref unsafe_m_selection_list >> ('test_poly')
+Ref unsafe_as_string_list >> (u'test_poly',)
+Ref unsafe_m_dag_path >> test_poly
+Ref unsafe_full_path_name >> |group5|group4|group3|group2|group1|test_poly
+Ref unsafe_partial_path_name >> test_poly
+
+
 ### test test_poly
-Ref format >> DagNode<'test_poly'>
+Ref format >> DagNode<u'test_poly'>
 Ref ref_type >> 1
 ### test test_poly.vtx[*]
-Ref format >> Component<'test_poly.vtx[0:381]'>
+Ref format >> Component<u'test_poly.vtx[0:381]'>
 ### test test_poly.vtx[0]
-Ref format >> Component<'test_poly.vtx[0]'>
+Ref format >> Component<u'test_poly.vtx[0]'>
 ### test test_poly.tx
-Ref format >> Plug<'test_poly.translateX'>
+Ref format >> Plug<u'test_poly.translateX'>
 Ref ref_type >> 0
+
+
+### test object null check
+Ref is_null >> True
 ```
 
 ### 版权说明
