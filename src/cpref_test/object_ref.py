@@ -24,15 +24,28 @@ doGroup 0 1 1;
 setKeyframe {"group5"};""")
     r = Ref("test_poly")
     print("Ref __init__ >>", r)
+    print("Ref is_null >>", r.is_null())
     print("Ref as_string >>", r.as_string())
     print("Ref as_string_list >>", r.as_string_list())
-    print("Ref full_path_name >>", r.full_path_name())
-    print("Ref partial_path_name >>", r.partial_path_name())
+
+    print("")
+    print("")
+
+    print("### test unsafe methods")
+    print("Ref unsafe_m_selection_list >>", r.unsafe_m_selection_list())
+    # print("Ref unsafe_m_it_selection_list >>", r.unsafe_m_it_selection_list())
+    print("Ref unsafe_as_string_list >>", r.unsafe_as_string_list())
+    print("Ref unsafe_m_dag_path >>", r.unsafe_m_dag_path())
+    print("Ref unsafe_full_path_name >>", r.unsafe_full_path_name())
+    print("Ref unsafe_partial_path_name >>", r.unsafe_partial_path_name())
+
+    print("")
+    print("")
 
     print("### test test_poly")
     r = Ref("test_poly")
     print("Ref format >>", r)
-    print("Ref ref_type >>", r.ref_type())
+    print("Ref ref_type >>", r.ref_type)
 
     print("### test test_poly.vtx[*]")
     r = Ref("test_poly.vtx[*]")
@@ -45,7 +58,20 @@ setKeyframe {"group5"};""")
     print("### test test_poly.tx")
     r = Ref("test_poly.tx")
     print("Ref format >>", r)
-    print("Ref ref_type >>", r.ref_type())
+    print("Ref ref_type >>", r.ref_type)
+
+    print("")
+    print("")
+
+    print("### test object null check")
+    r = Ref("test_poly")
+    mel.eval("file -f -new;")
+    # print("Ref __init__ >>", r)
+    print("Ref is_null >>", r.is_null())
+    # print("Ref as_string >>", r.as_string())
+    # print("Ref as_string_list >>", r.as_string_list())
+
+    # print("Ref full_path_name >>", r.full_path_name())
 
     #
     # print("### test all nodes")
