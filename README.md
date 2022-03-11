@@ -31,37 +31,19 @@ mayapy -m pip install cpref
 ```python
 import maya.mel as mel
 from cpref.object_ref import Ref
+
 mel.eval("""polySphere -r 1 -sx 20 -sy 20 -ax 0 1 0 -cuv 2 -ch 1 -n test_poly;
 doGroup 0 1 1;
 doGroup 0 1 1;
 doGroup 0 1 1;
 doGroup 0 1 1;
 doGroup 0 1 1;
-setKeyframe -breakdown 0 -preserveCurveShape 0 -hierarchy none -controlPoints 0 -shape 0 {"group5"};""")
+setKeyframe {"group5"};""")
 r = Ref("test_poly")
 print("Ref __init__ >>", r)
+print("Ref is_null >>", r.is_null())
 print("Ref as_string >>", r.as_string())
 print("Ref as_string_list >>", r.as_string_list())
-print("Ref full_path_name >>", r.full_path_name())
-print("Ref partial_path_name >>", r.partial_path_name())
-
-print("### test test_poly")
-r = Ref("test_poly")
-print("Ref format >>", r)
-print("Ref ref_type >>", r.ref_type())
-
-print("### test test_poly.vtx[*]")
-r = Ref("test_poly.vtx[*]")
-print("Ref format >>", r)
-
-print("### test test_poly.vtx[0]")
-r = Ref("test_poly.vtx[0]")
-print("Ref format >>", r)
-
-print("### test test_poly.tx")
-r = Ref("test_poly.tx")
-print("Ref format >>", r)
-print("Ref ref_type >>", r.ref_type())
 ```
 
 ### 功能介绍
@@ -73,6 +55,7 @@ Maya节点引用功能提供了对Maya节点长期引用
 ```python
 from __future__ import unicode_literals, print_function
 
+
 def test():
     import maya.mel as mel
     from cpref.object_ref import Ref
@@ -82,18 +65,30 @@ doGroup 0 1 1;
 doGroup 0 1 1;
 doGroup 0 1 1;
 doGroup 0 1 1;
-setKeyframe -breakdown 0 -preserveCurveShape 0 -hierarchy none -controlPoints 0 -shape 0 {"group5"};""")
+setKeyframe {"group5"};""")
     r = Ref("test_poly")
     print("Ref __init__ >>", r)
+    print("Ref is_null >>", r.is_null())
     print("Ref as_string >>", r.as_string())
     print("Ref as_string_list >>", r.as_string_list())
-    print("Ref full_path_name >>", r.full_path_name())
-    print("Ref partial_path_name >>", r.partial_path_name())
+
+    print("")
+    print("")
+
+    print("### test unsafe methods")
+    print("Ref unsafe_m_selection_list >>", r.unsafe_m_selection_list())
+    print("Ref unsafe_as_string_list >>", r.unsafe_as_string_list())
+    print("Ref unsafe_m_dag_path >>", r.unsafe_m_dag_path())
+    print("Ref unsafe_full_path_name >>", r.unsafe_full_path_name())
+    print("Ref unsafe_partial_path_name >>", r.unsafe_partial_path_name())
+
+    print("")
+    print("")
 
     print("### test test_poly")
     r = Ref("test_poly")
     print("Ref format >>", r)
-    print("Ref ref_type >>", r.ref_type())
+    print("Ref ref_type >>", r.ref_type)
 
     print("### test test_poly.vtx[*]")
     r = Ref("test_poly.vtx[*]")
@@ -106,7 +101,16 @@ setKeyframe -breakdown 0 -preserveCurveShape 0 -hierarchy none -controlPoints 0 
     print("### test test_poly.tx")
     r = Ref("test_poly.tx")
     print("Ref format >>", r)
-    print("Ref ref_type >>", r.ref_type())
+    print("Ref ref_type >>", r.ref_type)
+
+    print("")
+    print("")
+
+    print("### test object null check")
+    r = Ref("test_poly")
+    mel.eval("file -f -new;")
+    print("Ref is_null >>", r.is_null())
+
 
 test()
 ```
