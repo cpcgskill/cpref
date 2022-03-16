@@ -8,7 +8,7 @@ with open("README.md", "rb") as f:
 
 setuptools.setup(
     name="cpref",
-    version="1.0.0",
+    version="1.1.0",
     author="cpcgskill",
     author_email="cpcgskill@outlook.com",
     description="Maya 对象引用库",
